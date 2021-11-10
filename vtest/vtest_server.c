@@ -39,6 +39,8 @@
 #include <getopt.h>
 #include <string.h>
 
+#include <epoxy/egl.h>
+
 #include "util.h"
 #include "util/u_double_list.h"
 #include "util/u_math.h"
@@ -111,6 +113,7 @@ struct vtest_server server = {
    .do_fork = true,
    .loop = true,
    .multi_clients = false,
+   .will_swap_buffers = false,
 
    .ctx_flags = 0,
 };
@@ -124,6 +127,7 @@ static void vtest_server_open_socket(void);
 static void vtest_server_run(void);
 static void vtest_server_close_socket(void);
 static int vtest_client_dispatch_commands(struct vtest_client *client);
+static void vtest_swap_buffers(void);
 
 
 #if _EXPORT_MAIN == 1
@@ -598,6 +602,11 @@ static void vtest_server_run(void)
    }
 
    while (run) {
+      if (server.will_swap_buffers) {
+         server.will_swap_buffers = false;
+         eglSwapBuffers(eglGetCurrentDisplay(), eglGetCurrentSurface(EGL_DRAW));
+      }
+
       const bool was_empty = LIST_IS_EMPTY(&server.active_clients);
       bool is_empty;
 
@@ -736,4 +745,9 @@ static void vtest_server_close_socket(void)
       close(server.socket);
       server.socket = -1;
    }
+}
+
+static void vtest_swap_buffers(void)
+{
+   server.will_swap_buffers = true;
 }
