@@ -128,7 +128,7 @@ static void vtest_server_open_socket(void);
 static void vtest_server_run(void);
 static void vtest_server_close_socket(void);
 static int vtest_client_dispatch_commands(struct vtest_client *client);
-VIRGL_EXPORT static void vtest_swap_buffers(void);
+VIRGL_EXPORT void vtest_swap_buffers(void);
 
 
 #if _EXPORT_MAIN == 1
@@ -748,7 +748,7 @@ static void vtest_server_close_socket(void)
    }
 }
 
-static void vtest_swap_buffers(void)
+void vtest_swap_buffers(void)
 {
    server.will_swap_buffers = true;
 }
