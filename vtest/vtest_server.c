@@ -602,15 +602,16 @@ static void vtest_server_run(void)
       vtest_server_open_socket();
    }
 
+   int dimensions[4];
    while (run) {
       if (server.will_swap_buffers) {
          server.will_swap_buffers = false;
-         glGetIntegerv(GL_VIEWPORT, dimemsions);
+         glGetIntegerv(GL_VIEWPORT, dimensions);
 
          int buf;
          glGetIntegerv(GL_DRAW_FRAMEBUFFER_BINDING, &buf);
          glBindFramebufferEXT(GL_DRAW_FRAMEBUFFER_EXT, 0);
-         glBlitFramebuffer(0, dimemsions[3], dimemsions[2], 0, 0, 0, dimemsions[2], dimemsions[3], GL_COLOR_BUFFER_BIT, GL_NEAREST);
+         glBlitFramebuffer(0, dimensions[3], dimensions[2], 0, 0, 0, dimensions[2], dimensions[3], GL_COLOR_BUFFER_BIT, GL_NEAREST);
          eglSwapBuffers(eglGetCurrentDisplay(), eglGetCurrentSurface(EGL_DRAW));
          glBindFramebufferEXT(GL_DRAW_FRAMEBUFFER_EXT, buf);
       }
