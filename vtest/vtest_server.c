@@ -605,7 +605,14 @@ static void vtest_server_run(void)
    while (run) {
       if (server.will_swap_buffers) {
          server.will_swap_buffers = false;
+         glGetIntegerv(GL_VIEWPORT, dimemsions);
+
+         int buf;
+         glGetIntegerv(GL_DRAW_FRAMEBUFFER_BINDING, &buf);
+         glBindFramebufferEXT(GL_DRAW_FRAMEBUFFER_EXT, 0);
+         glBlitFramebuffer(0, dimemsions[3], dimemsions[2], 0, 0, 0, dimemsions[2], dimemsions[3], GL_COLOR_BUFFER_BIT, GL_NEAREST);
          eglSwapBuffers(eglGetCurrentDisplay(), eglGetCurrentSurface(EGL_DRAW));
+         glBindFramebufferEXT(GL_DRAW_FRAMEBUFFER_EXT, buf);
       }
 
       const bool was_empty = LIST_IS_EMPTY(&server.active_clients);
