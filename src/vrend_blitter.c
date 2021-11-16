@@ -380,7 +380,9 @@ static void vrend_renderer_init_blit_ctx(struct vrend_blitter_ctx *blit_ctx)
 
    vrend_sync_make_current(blit_ctx->gl_context);
    glGenVertexArrays(1, &blit_ctx->vaoid);
-   glGenFramebuffers(1, &blit_ctx->fb_id);
+   
+   glGetIntegerv(GL_DRAW_FRAMEBUFFER_BINDING, &blit_ctx->fb_id);
+   //glGenFramebuffers(1, &blit_ctx->fb_id);
 
    glGenBuffers(1, &blit_ctx->vbo_id);
    blit_ctx->vs = build_and_check(GL_VERTEX_SHADER,
