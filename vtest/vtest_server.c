@@ -602,18 +602,19 @@ static void vtest_server_run(void)
       vtest_server_open_socket();
    }
 
-   int dimensions[4];
+   int dimensions[5] = {0,0,0,0,-1}; // x, y, w, h, fb_id
    while (run) {
       if (server.will_swap_buffers) {
          server.will_swap_buffers = false;
          glGetIntegerv(GL_VIEWPORT, dimensions);
 
-         int buf;
-         glGetIntegerv(GL_DRAW_FRAMEBUFFER_BINDING, &buf);
+         if (dimensions[4] == -1) {
+            glGetIntegerv(GL_DRAW_FRAMEBUFFER_BINDING, &dimensions[4]);
+         }
          glBindFramebufferEXT(GL_DRAW_FRAMEBUFFER_EXT, 0);
          glBlitFramebuffer(0, dimensions[3], dimensions[2], 0, 0, 0, dimensions[2], dimensions[3], GL_COLOR_BUFFER_BIT, GL_NEAREST);
          eglSwapBuffers(eglGetCurrentDisplay(), eglGetCurrentSurface(EGL_DRAW));
-         glBindFramebufferEXT(GL_DRAW_FRAMEBUFFER_EXT, buf);
+         glBindFramebufferEXT(GL_DRAW_FRAMEBUFFER_EXT, dimensions[4]);
       }
 
       const bool was_empty = LIST_IS_EMPTY(&server.active_clients);
