@@ -138,7 +138,7 @@ libvirgl_dep = declare_dependency(
    include_directories: libvirgl_inc
 )
 
-libvirglrenderer = shared_library(
+libvirglrenderer = static_library(
    'virglrenderer',
    virglrenderer_sources,
    include_directories: [inc_gallium, inc_configuration],
