@@ -143,11 +143,11 @@ libvirglrenderer = static_library(
    virglrenderer_sources,
    include_directories: [inc_gallium, inc_configuration],
    dependencies : [virgl_depends, libvirgl_dep],
-   version : binary_age.to_string() + '.'
-             + interface_age.to_string() + '.'
-             + revision.to_string(),
    install : true
 )
+#   version : binary_age.to_string() + '.'
+#             + interface_age.to_string() + '.'
+#             + revision.to_string(),
 
 libvirglrenderer_dep = declare_dependency(
    link_with: libvirglrenderer,
