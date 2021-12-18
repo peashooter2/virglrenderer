@@ -623,7 +623,7 @@ static void vtest_server_run(void)
          glBindFramebuffer(GL_READ_FRAMEBUFFER, fb_id);
          glFramebufferTexture2D(GL_READ_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, dimensions[4], 0);
          glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
-         glBlitFramebuffer(0, 0, dimensions[2], dimensions[3], 0, 0, dimensions[2], dimensions[3], GL_COLOR_BUFFER_BIT, GL_NEAREST);
+         glBlitFramebuffer(0, dimensions[3], dimensions[2], 0, 0, 0, dimensions[2], dimensions[3], GL_COLOR_BUFFER_BIT, GL_NEAREST);
          eglSwapBuffers(eglGetCurrentDisplay(), eglGetCurrentSurface(EGL_DRAW));
       }
 
