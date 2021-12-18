@@ -7855,7 +7855,7 @@ static void do_readpixels(struct vrend_resource *res,
    glBindFramebuffer(GL_FRAMEBUFFER, fb_id);
 
    char texid[8];
-   sprintf(texid, "%d", gr->id);
+   sprintf(texid, "%d", res->id);
    setenv("VIRGL_TEXTURE_ID", texid, 1);
 
    vrend_fb_bind_texture(res, idx, level, layer);
