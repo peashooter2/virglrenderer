@@ -1626,17 +1626,21 @@ static struct vrend_linked_shader_program *add_shader_program(struct vrend_sub_c
    if (fs->sel->sinfo.num_outputs > 1) {
       if (util_blend_state_is_dual(&sub_ctx->blend_state, 0)) {
          if (has_feature(feat_dual_src_blend)) {
+/*
             glBindFragDataLocationIndexed(prog_id, 0, 0, "fsout_c0");
             glBindFragDataLocationIndexed(prog_id, 0, 1, "fsout_c1");
+*/
          } else {
             vrend_report_context_error(sub_ctx->parent, VIRGL_ERROR_CTX_ILLEGAL_DUAL_SRC_BLEND, 0);
          }
          sprog->dual_src_linked = true;
       } else {
+/*
          if (has_feature(feat_dual_src_blend)) {
             glBindFragDataLocationIndexed(prog_id, 0, 0, "fsout_c0");
             glBindFragDataLocationIndexed(prog_id, 1, 0, "fsout_c1");
          }
+*/
          sprog->dual_src_linked = false;
       }
    } else
