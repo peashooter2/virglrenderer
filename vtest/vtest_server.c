@@ -610,6 +610,7 @@ static void vtest_server_run(void)
    char *ptrStr;
    asprintf(&ptrStr, "%ld", (long) &texture_id);
    setenv("VTEST_TEXTUREID_PTR", ptrStr, 1);
+   free(ptrStr);
 
    int dimensions[5] = {0,0,0,0}; // x, y, w, h
    while (run) {
