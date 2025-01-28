@@ -22,7 +22,7 @@ jobs:
 
       - name: Setup
         run: |
-          ls ${ANDROID_SDK_ROOT}/ndk-bundle
+          ls ${ANDROID_SDK_ROOT}
           sudo pip3 install meson ninja
           mkdir -p /tmp/build/lib/pkgconfig
           cp libdrm.pc /tmp/build/lib/pkgconfig/
