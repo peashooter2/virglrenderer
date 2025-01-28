@@ -15,14 +15,13 @@ jobs:
 
     runs-on: ubuntu-20.04
     env:
-      ANDROID_NDK_HOME: "${ANDROID_SDK_ROOT}"
+      ANDROID_NDK_HOME: "${ANDROID_SDK_ROOT}/ndk"
 
     steps:
       - uses: actions/checkout@v2
 
       - name: Setup
         run: |
-          ls ${ANDROID_SDK_ROOT}
           sudo pip3 install meson ninja
           mkdir -p /tmp/build/lib/pkgconfig
           cp libdrm.pc /tmp/build/lib/pkgconfig/
