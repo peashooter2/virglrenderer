@@ -26,6 +26,10 @@ jobs:
           mkdir -p /tmp/build/lib/pkgconfig
           cp libdrm.pc /tmp/build/lib/pkgconfig/
 
+      - name: Setup
+        run: |
+          ls /usr/local/lib/android/sdk/ndk-bundle/toolchains/llvm/prebuilt/linux-x86_64/bin/
+
       - name: Build libepoxy
         run: |
           git clone --depth 1 https://github.com/anholt/libepoxy.git
